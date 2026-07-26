@@ -116,8 +116,9 @@ export default function Products() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="py-20 lg:py-32 gradient-bg"
+        className="pt-2 pb-16 lg:pt-4 lg:pb-24 gradient-bg"
       >
+        {/* EDUCATIONAL NOTE: Custom top padding (pt-2 / lg:pt-4) removes the extra white space directly below the header. */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}

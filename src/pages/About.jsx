@@ -6,36 +6,59 @@ import { Button } from "../components/ui/button";
 import { ArrowRight, Award, Users, Globe, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
+// Import locally stored team member images.
+// EDUCATIONAL NOTE FOR STUDENTS (TypeScript & React):
+// In a TypeScript React environment, importing non-code assets like images (.png, .jpg)
+// requires appropriate module declarations (usually in a `react-app-env.d.ts` or `vite-env.d.ts` file)
+// so the compiler does not flag them as compilation errors.
+import nitinImg from "../assets/team/nitin.jpg";
+import ajinkyaImg from "../assets/team/ajinkya.png";
+import nirajanImg from "../assets/team/nirajan.jpg";
+import raviImg from "../assets/team/ravi.jpg";
+import lathikaImg from "../assets/team/lathika.png";
+import boomikaImg from "../assets/team/boomika.jpg";
+
+// EDUCATIONAL NOTE FOR STUDENTS (State vs Static Data):
+// Although this array is currently declared as a static variable, in high-scale production apps 
+// this data would typically be fetched from a database or API endpoint via hook libraries like
+// React Query or simple `useEffect`. In Material UI (MUI), you would map this data array to a 
+// responsive layout where each object corresponds to a `<Grid item>` containing a `<Card>`.
 const team = [
   {
-    name: "KJ Nitin",
-    role: "CEO & Founder",
-    bio: "Leading the vision, driving innovation, and guiding the entire team toward excellence",
-    image: "https://ui-avatars.com/api/?name=KJ+Nitin&size=200&background=1e3a8a&color=fff&bold=true"
+    name: "Nitin",
+    role: "Chief Executive Officer",
+    bio: "Leading the vision, driving business strategy, and guiding the entire team toward excellence.",
+    image: nitinImg
+  },
+  {
+    name: "Rahane",
+    role: "Chief Technology Officer",
+    bio: "Spearheading tech architecture, system engineering plans, and product development.",
+    image: ajinkyaImg
   },
   {
     name: "Niranjan",
-    role: "CSO | BDM Head | Chennai Lead",
-    bio: "Driving student engagement initiatives, managing business collaborations, and heading Chennai operations",
-    image: "https://ui-avatars.com/api/?name=Niranjan&size=200&background=ef4444&color=fff&bold=true"
+    role: "Chief Chennai Manager",
+    bio: "Overseeing Chennai branch operations, business ecosystem partnerships, and student outreach.",
+    image: nirajanImg
   },
   {
-    name: "Boomika",
-    role: "CAO & HR Manager",
-    bio: "Building a strong organizational culture and ensuring smooth administration",
-    image: "https://ui-avatars.com/api/?name=Boomika&size=200&background=1e3a8a&color=fff&bold=true"
+    name: "Ravi",
+    role: "Chief Administrative Officer",
+    bio: "Directing administrative operations, operational compliance, and organizational setup.",
+    image: raviImg
   },
   {
-    name: "Akshaya",
-    role: "Project Manager | BDM Head | Trichy Lead",
-    bio: "Executing projects with precision, leading Trichy operations, and expanding business reach",
-    image: "https://ui-avatars.com/api/?name=Akshaya&size=200&background=ef4444&color=fff&bold=true"
+    name: "Lathika",
+    role: "Women Empowerment Lead",
+    bio: "Fostering inclusive workplace initiatives and advancing women career development pathways.",
+    image: lathikaImg
   },
   {
-    name: "Vijay",
-    role: "Mentor",
-    bio: "",
-    image: "https://ui-avatars.com/api/?name=Vijay&size=200&background=1e3a8a&color=fff&bold=true"
+    name: "Boomika Manivanna",
+    role: "HR Manager",
+    bio: "Developing talent acquisition strategies, onboarding pathways, and positive workplace culture.",
+    image: boomikaImg
   }
 ];
 
@@ -91,8 +114,9 @@ export default function About() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="py-20 lg:py-32 gradient-bg"
+        className="pt-2 pb-16 lg:pt-4 lg:pb-24 gradient-bg"
       >
+        {/* EDUCATIONAL NOTE: Custom top padding (pt-2 / lg:pt-4) removes the extra white space directly below the header. */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -261,7 +285,15 @@ export default function About() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* 
+            EDUCATIONAL NOTE FOR STUDENTS (Responsive Grids):
+            In Tailwind, responsiveness is achieved via breakpoints like `md:` and `lg:`.
+            In Material UI (MUI), the equivalent structure is achieved using layout components:
+            `<Grid container spacing={4}>` and inside the map:
+            `<Grid item xs={12} sm={6} md={4}>`
+            This ensures 1 column on mobile/extra-small screens, 2 columns on small/medium screens, and 3 columns on large screens.
+          */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {team.map((member, index) => (
               <motion.div
                 key={index}
@@ -269,13 +301,22 @@ export default function About() {
                 whileHover={{ y: -10 }}
                 className="text-center group"
               >
-                <div className="relative mb-4">
+                {/* 
+                  EDUCATIONAL NOTE FOR STUDENTS (CSS Positioning & Wrappers):
+                  We set fixed dimensions `w-48 h-48` and centering `mx-auto` on the parent container
+                  rather than on the child `<img>` tag. This ensures that the overlay container 
+                  (`absolute inset-0`) matches the exact same bounds as the image, preventing it
+                  from stretching to fill the entire responsive grid width.
+                  In MUI, we achieve this similarly by wrapping an `<Avatar>` component in a `<Box>`
+                  defined with the desired dimensions and `position: 'relative'`.
+                */}
+                <div className="relative w-48 h-48 mx-auto mb-4 overflow-hidden rounded-2xl shadow-lg">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-48 h-48 mx-auto rounded-2xl object-cover shadow-lg group-hover:shadow-xl transition-shadow duration-200"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 gradient-bg rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-200"></div>
+                  <div className="absolute inset-0 gradient-bg opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
                 <div className="text-sm font-medium gradient-text mb-2">{member.role}</div>

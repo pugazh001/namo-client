@@ -4,12 +4,20 @@ import { createPageUrl } from "./utils";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "./components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import namodotLogo from "./assets/namodot.png";
+
+// EDUCATIONAL NOTE FOR STUDENTS:
+// In modern React bundlers like Vite, importing an image asset returns its resolved public URL.
+// When using Material UI (MUI), you can pass this imported path directly into components like
+// `<Avatar src={namodotLogo} alt="Logo" />` or `<CardMedia component="img" image={namodotLogo} />`
+// or use it inside standard HTML `<img>` elements within a `<Box>` component.
 
 const navigationItems = [
   { title: "Home", url: createPageUrl("Home") },
+  { title: "About Us", url: createPageUrl("About") },
   { title: "Services", url: createPageUrl("Services") },
   { title: "Products", url: createPageUrl("Products") },
-  { title: "About", url: createPageUrl("About") },
+  { title: "Careers", url: createPageUrl("Careers") },
   { title: "Contact", url: createPageUrl("Contact") },
 ];
 
@@ -19,7 +27,7 @@ export default function Layout({ children, currentPageName }) {
 
   return (
     <div className="min-h-screen bg-white">
-      <style jsx>{`
+      <style>{`
         :root {
           --primary-gradient: linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(239, 68, 68) 100%);
           --primary-blue: rgb(30, 58, 138);
@@ -69,6 +77,12 @@ export default function Layout({ children, currentPageName }) {
           background: linear-gradient(white, white) padding-box,
                       linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(239, 68, 68) 100%) border-box;
         }
+
+        .get-started-btn {
+          border: 2px solid transparent;
+          background: linear-gradient(white, white) padding-box,
+                      linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(239, 68, 68) 100%) border-box;
+        }
       `}</style>
 
       {/* Header */}
@@ -81,9 +95,9 @@ export default function Layout({ children, currentPageName }) {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.5, ease: "backOut" }}
-                className="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center mr-3"
+                className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center mr-3 bg-slate-50 border border-gray-100"
               >
-                <span className="text-white font-bold text-lg">N</span>
+                <img src={namodotLogo} alt="Namodot Logo" className="w-full h-full object-contain p-1" />
               </motion.div>
               <span className="text-xl font-bold gradient-text">Namodot IT Solutions</span>
             </Link>
@@ -99,10 +113,10 @@ export default function Layout({ children, currentPageName }) {
                 >
                   <Link
                     to={item.url}
-                    className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full nav-item-hover ${
+                    className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full border-2 border-transparent ${
                       location.pathname === item.url
-                        ? "nav-item-active"
-                        : "text-gray-700 hover:text-blue-900"
+                        ? "nav-item-active hover:opacity-90"
+                        : "nav-item-hover text-gray-700 hover:text-blue-900"
                     }`}
                   >
                     {item.title}
@@ -115,9 +129,8 @@ export default function Layout({ children, currentPageName }) {
                 transition={{ delay: 0.5, duration: 0.3 }}
               >
                 <Link to={createPageUrl("Contact")}>
-                  <Button className="ml-4 gradient-bg hover:opacity-90 text-white px-6 py-2 rounded-full transition-all duration-200 hover:shadow-lg transform hover:scale-105">
-                    Get Started
-                   
+                  <Button className="ml-4 get-started-btn px-6 py-2 rounded-full transition-all duration-200 hover:shadow-lg transform hover:scale-105 font-semibold">
+                    <span className="gradient-text">Get Started</span>
                   </Button>
                 </Link>
               </motion.div>
@@ -157,11 +170,10 @@ export default function Layout({ children, currentPageName }) {
                   >
                     <Link
                       to={item.url}
-                      className={`block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-                        location.pathname === item.url
+                      className={`block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${location.pathname === item.url
                           ? "nav-item-active"
                           : "text-gray-700 hover:bg-gray-50"
-                      }`}
+                        }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {item.title}
@@ -173,13 +185,12 @@ export default function Layout({ children, currentPageName }) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6, duration: 0.2 }}
                 >
-                  <Link 
+                  <Link
                     to={createPageUrl("Contact")}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <Button className="w-full mt-2 gradient-bg text-white rounded-lg transform hover:scale-105 transition-all duration-200">
-                      Get Started
-                      <ChevronRight className="w-4 h-4 ml-1" />
+                    <Button className="w-full mt-3 py-4 px-4 text-base get-started-btn rounded-xl transform hover:scale-105 transition-all duration-200 font-semibold min-h-[52px]">
+                      <span className="gradient-text text-base">Get Started</span>
                     </Button>
                   </Link>
                 </motion.div>
@@ -210,13 +221,13 @@ export default function Layout({ children, currentPageName }) {
             {/* Company Info */}
             <div className="md:col-span-2">
               <div className="flex items-center mb-4">
-                <div className="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center mr-2">
-                  <span className="text-white font-bold text-sm">N</span>
+                <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center mr-2 bg-slate-50 border border-gray-100">
+                  <img src={namodotLogo} alt="Namodot Logo" className="w-full h-full object-contain p-0.5" />
                 </div>
                 <span className="text-xl font-bold gradient-text">Namodot IT Solutions</span>
               </div>
               <p className="text-gray-600 mb-4 max-w-md">
-                Leading the future with innovative solutions and exceptional service. 
+                Leading the future with innovative solutions and exceptional service.
                 Your trusted partner for business growth and success.
               </p>
             </div>
