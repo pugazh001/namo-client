@@ -1,3 +1,4 @@
+
 # ===========================
 # Stage 1 - Build React App
 # ===========================
@@ -9,7 +10,11 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN if [ -f package-lock.json ]; then \
+      npm ci --legacy-peer-deps; \
+    else \
+      npm install --legacy-peer-deps; \
+    fi
 
 # Copy project files
 COPY . .
@@ -22,17 +27,12 @@ RUN npm run build
 # ===========================
 FROM nginx:alpine
 
-# Remove default nginx files
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy React build
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy custom nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose nginx port
 EXPOSE 80
 
-# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
