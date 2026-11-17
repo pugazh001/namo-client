@@ -14,77 +14,93 @@ import {
   Star
 } from "lucide-react";
 import { motion } from "framer-motion";
+import shipcartImg from "../assets/products/shipcart.jpg";
+import campusoneImg from "../assets/products/campusone.jpg";
+import schoolImg from "../assets/products/school.jpg";
+import healthcareImg from "../assets/products/healthcare.jpg";
+import hrsuiteImg from "../assets/products/hrsuite.jpg";
 
 const products = [
+  {
+    name: "Namo Shipcart",
+    category: "Export & Import",
+    description: "An advanced export & import tracking and smart logistics platform. Track global shipments in real-time, automate customs clearance documentation, monitor container milestones, and streamline cross-border freight operations.",
+    price: "Custom Pricing",
+    rating: 4.9,
+    reviews: 142,
+    features: [
+      "Real-Time Air & Ocean Cargo Tracking",
+      "Automated Export-Import Customs Filings",
+      "Container & Port Milestone Alerts",
+      "Freight Cost & Route Optimization"
+    ],
+    image: shipcartImg,
+    popular: true
+  },
   {
     name: "Namo CampusOne",
     category: "Education",
     description: "Namo CampusOne is an all-in-one ERP solution that digitalizes academic and administrative tasks. It improves efficiency, reduces manual work, and ensures smooth communication across the entire campus.",
-    price: "",
+    price: "Custom Pricing",
     rating: 4.7,
+    reviews: 98,
     features: [
-      
+      "Academic & Student Lifecycle Management",
+      "Automated Fee Collection & Accounting",
+      "Examinations & Digital Grade Books",
+      "Faculty & Staff Portal with Payroll"
     ],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
+    image: campusoneImg,
     popular: true
   },
   {
     name: "Namo School",
     category: "Education",
     description: "NamoSchool is a complete school management system that automates attendance, fees, exams, timetable, and student records. It helps teachers, parents, and administrators manage everything from one unified platform.",
-    price: "",
+    price: "Custom Pricing",
     rating: 4.8,
+    reviews: 114,
     features: [
+      "Real-Time Attendance & SMS Alerts",
+      "Timetable & Exam Scheduling Engine",
+      "Parent-Teacher Communication App",
+      "Student Performance Analytics"
     ],
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600",
-    popular: true
+    image: schoolImg,
+    popular: false
   },
- {
-  name: "NamoLaundry",
-  category: "Service",
-  description: "A fast, affordable, and professional laundry service designed to save time while delivering premium garment care.",
-  price: "Based on Service",
-  rating: 4.9,
-  features: [
-    "Doorstep Pickup & Delivery",
-    "Eco-Friendly Cleaning",
-    "Express Service Available",
-    "Premium Fabric Care"
-  ],
-  image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
-  popular: false
-},
-{
-  name: "Namo Healthcare",
-  category: "Hospital",
-  description: "A trusted healthcare ecosystem offering world-class medical care, advanced diagnostics, and expert treatment across specialties.",
-  price: "Insurance & Plans Available",
-  rating: 5.0,
-  features: [
-    "24/7 Emergency Care",
-    "Expert Specialists",
-    "Advanced Diagnostics",
-    "Patient-First Care Model"
-  ],
-  image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600",
-  popular: false
-},
-{
-  name: "Namo HrSuite",
-  category: "Service",
-  description: "A complete HR and workforce management platform simplifying payroll, attendance, recruitment, and compliance for growing businesses.",
-  price: "Custom Pricing",
-  rating: 5.0,
-  features: [
-    "Payroll Automation",
-    "Attendance & Shift Tracking",
-    "Performance & Appraisal Tools",
-    "Recruitment and Onboarding"
-  ],
-  image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600",
-  popular: false
-}
-
+  {
+    name: "Namo Healthcare",
+    category: "Hospital",
+    description: "A trusted healthcare ecosystem offering world-class medical care, advanced diagnostics, and expert treatment across specialties.",
+    price: "Insurance & Plans Available",
+    rating: 5.0,
+    reviews: 86,
+    features: [
+      "24/7 Emergency Care",
+      "Expert Specialists",
+      "Advanced Diagnostics",
+      "Patient-First Care Model"
+    ],
+    image: healthcareImg,
+    popular: false
+  },
+  {
+    name: "Namo HrSuite",
+    category: "Service",
+    description: "A complete HR and workforce management platform simplifying payroll, attendance, recruitment, and compliance for growing businesses.",
+    price: "Custom Pricing",
+    rating: 5.0,
+    reviews: 79,
+    features: [
+      "Payroll Automation",
+      "Attendance & Shift Tracking",
+      "Performance & Appraisal Tools",
+      "Recruitment and Onboarding"
+    ],
+    image: hrsuiteImg,
+    popular: false
+  }
 ];
 
 const containerVariants = {
@@ -168,66 +184,77 @@ export default function Products() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ y: -10, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" }}
-                className="group bg-white rounded-3xl shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden"
+                whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.2)" }}
+                className="group bg-white rounded-3xl shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col justify-between"
               >
-                {product.popular && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="gradient-bg text-white text-center py-2"
-                  >
-                    <Badge className="bg-white/20 text-white border-white/30">
-                      Most Popular
-                    </Badge>
-                  </motion.div>
-                )}
-                
-                <div className="p-8">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <Badge variant="outline" className="mb-2">{product.category}</Badge>
-                      <h3 className="text-2xl font-bold text-gray-900">{product.name}</h3>
+                <div>
+                  {/* Product Image Cover */}
+                  <div className="relative h-52 sm:h-60 w-full overflow-hidden bg-slate-100">
+                    {product.image && (
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    
+                    {product.popular && (
+                      <div className="absolute top-4 right-4">
+                        <span className="gradient-bg text-white text-xs font-bold tracking-wide px-3.5 py-1.5 rounded-full shadow-lg">
+                          Most Popular
+                        </span>
+                      </div>
+                    )}
+                    
+                    <div className="absolute bottom-3 left-4">
+                      <Badge className="bg-white/95 text-gray-900 font-semibold shadow-sm backdrop-blur-sm border-0">
+                        {product.category}
+                      </Badge>
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold gradient-text">{product.price}</div>
-                      <div className="flex items-center text-sm text-gray-600 mt-1">
-                        <Star className="w-4 h-4 text-yellow-400 fill-current mr-1" />
-                        {product.rating} ({product.reviews} reviews)
+                  </div>
+
+                  <div className="p-6 sm:p-8">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-900 font-brand">{product.name}</h3>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xl font-bold gradient-text">{product.price}</div>
+                        <div className="flex items-center text-sm text-gray-600 mt-1">
+                          <Star className="w-4 h-4 text-yellow-400 fill-current mr-1" />
+                          {product.rating} {product.reviews ? `(${product.reviews} reviews)` : ""}
+                        </div>
                       </div>
                     </div>
+
+                    <p className="text-gray-600 mb-6">{product.description}</p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-8">
+                      {product.features.map((feature, featureIndex) => (
+                        <motion.div
+                          key={featureIndex}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: featureIndex * 0.1 }}
+                          className="flex items-center text-sm text-gray-600"
+                        >
+                          <CheckCircle className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" />
+                          {feature}
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
+                </div>
 
-                  <p className="text-gray-600 mb-6">{product.description}</p>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-8">
-                    {product.features.map((feature, featureIndex) => (
-                      <motion.div
-                        key={featureIndex}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: featureIndex * 0.1 }}
-                        className="flex items-center text-sm text-gray-600"
-                      >
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                        {feature}
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Link to={createPageUrl("Contact")} className="flex-1">
-                      <Button className="w-full gradient-bg hover:opacity-90 text-white py-3 rounded-full font-semibold transition-all duration-200 hover:shadow-lg transform hover:scale-105">
-                        Get Started
-                      
-                      </Button>
-                    </Link>
-                    <Button variant="outline" className="px-6 py-3 rounded-full font-semibold hover:bg-gray-50 transition-all duration-200 transform hover:scale-105">
-                   
+                <div className="px-6 pb-6 sm:px-8 sm:pb-8 pt-0">
+                  <Link to={createPageUrl("Contact")}>
+                    <Button className="w-full gradient-bg hover:opacity-90 text-white py-3.5 rounded-full font-semibold transition-all duration-200 hover:shadow-lg transform hover:scale-[1.02] cursor-pointer">
+                      Get Started
                     </Button>
-                  </div>
+                  </Link>
                 </div>
               </motion.div>
             ))}

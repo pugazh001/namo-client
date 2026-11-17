@@ -31,7 +31,7 @@ const team = [
     image: nitinImg
   },
   {
-    name: "Rahane",
+    name: "Raghul",
     role: "Chief Technology Officer",
     bio: "Spearheading tech architecture, system engineering plans, and product development.",
     image: ajinkyaImg

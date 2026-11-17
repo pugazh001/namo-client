@@ -16,7 +16,7 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
       <FeaturesSection />
-      {/* <TestimonialsSection /> */}
+      <TestimonialsSection />
 
       {/* CTA Section */}
       <motion.section
@@ -31,17 +31,15 @@ export default function Home() {
             Ready to Transform Your Business?
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Join thousands of companies that trust Namodot IT Solutions for their
+            Join thousands of companies that trust Namodot for their
             growth and success.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to={createPageUrl("Contact")}>
-              <Button className="bg-white text-blue-900 hover:bg-gray-50 px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:shadow-xl transform hover:scale-105">
+              <Button className="bg-white text-[var(--primary)] hover:bg-gray-100 px-8 py-3.5 rounded-full font-semibold transition-all duration-200 hover:shadow-xl transform hover:scale-105 cursor-pointer">
                 Get Started Today
-                
               </Button>
             </Link>
-          
           </div>
         </div>
       </motion.section>

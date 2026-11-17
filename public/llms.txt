@@ -1,0 +1,18 @@
+# NAMODOT
+> Next-generation Enterprise IT Solutions, Educational ERP, Healthcare Platforms, and Global Shipment Tracking Intelligence.
+
+## About
+NAMODOT is a modern technology and AI solutions organisation delivering cutting-edge digital enterprise software. Based in Trichy, Tamil Nadu, India, NAMODOT builds scalable web applications, enterprise management platforms, and logistics tracking architectures.
+
+## Flagship Products
+- **Namo Shipcart**: Global export-import cargo and container tracking platform with real-time multi-carrier telemetry, automated customs documentation, and port milestone alerts.
+- **Namo CampusOne**: All-in-one ERP system digitalizing university and higher education campus administrative and academic lifecycles.
+- **Namo School**: School management system automating attendance, fee collections, timetables, examinations, and parent communications.
+- **Namo Healthcare**: Digital healthcare ecosystem offering clinical management, electronic health records, patient care workflows, and medical telemetry.
+- **Namo HrSuite**: Complete workforce management platform simplifying corporate payroll, shift attendance, talent acquisition, and performance reviews.
+
+## Official Contact
+- **Website**: https://namodot.com/
+- **Phone**: +91 97915 57317
+- **Email**: namodot01@gmail.com
+- **Headquarters**: NAMODOT, UKT Malai, No. 4/167 I, 18th Cross, Shanmuga Nagar, Sri Kailash Santhanam Garden, Trichy, Tamil Nadu, India

@@ -134,13 +134,17 @@ export default function Contact() {
                   {
                     icon: MapPin,
                     title: "Office Address",
-                    content: ["D-25", "10TH Cross West", "Trichy- TamilNadu"]
+                    content: [
+                      "NAMODOT, UKT Malai",
+                      "No. 4/167 I, 18th Cross, Shanmuga Nagar",
+                      "Sri Kailash Santhanam Garden",
+                      "Trichy, Tamil Nadu"
+                    ]
                   },
                   {
                     icon: Phone,
                     title: "Phone Number",
-                    content: ["9025702729 | 9342615670"]
-
+                    content: ["+91 97915 57317"]
                   },
                   {
                     icon: Mail,
@@ -182,8 +186,8 @@ export default function Contact() {
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.8 }}
             >
-              <Card className="shadow-lg">
-                <CardContent className="p-8">
+              <Card className="shadow-xl rounded-2xl border border-gray-100 overflow-hidden bg-white">
+                <CardContent className="p-6 sm:p-8">
                   {submitted ? (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.9 }}
@@ -194,29 +198,28 @@ export default function Contact() {
                       <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
                         <Mail className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2 font-brand">Message Sent!</h3>
                       <p className="text-gray-600">
                         Thank you for reaching out. We'll get back to you within 24 hours.
                       </p>
                     </motion.div>
                   ) : (
                     <>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
-                      <form onSubmit={handleSubmit} className="space-y-6">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-6 font-brand">Send us a Message</h3>
+                      <form onSubmit={handleSubmit} className="space-y-5">
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: 0.1 }}
-                          className="space-y-2"
+                          className="flex flex-col space-y-1.5"
                         >
-                          <label className="text-sm font-medium text-gray-700">Name *</label>
+                          <label className="block text-sm font-semibold text-gray-700">Name *</label>
                           <Input
                             value={formData.name}
                             onChange={(e) => handleInputChange("name", e.target.value)}
                             placeholder="Your full name"
                             required
-                            className="transition-all duration-200 focus:ring-2 focus:ring-blue-500"
                           />
                         </motion.div>
 
@@ -225,16 +228,15 @@ export default function Contact() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: 0.2 }}
-                          className="space-y-2"
+                          className="flex flex-col space-y-1.5"
                         >
-                          <label className="text-sm font-medium text-gray-700">Email *</label>
+                          <label className="block text-sm font-semibold text-gray-700">Email *</label>
                           <Input
                             type="email"
                             value={formData.email}
                             onChange={(e) => handleInputChange("email", e.target.value)}
                             placeholder="your@email.com"
                             required
-                            className="transition-all duration-200 focus:ring-2 focus:ring-blue-500"
                           />
                         </motion.div>
 
@@ -243,16 +245,15 @@ export default function Contact() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: 0.3 }}
-                          className="space-y-2"
+                          className="flex flex-col space-y-1.5"
                         >
-                          <label className="text-sm font-medium text-gray-700">Message *</label>
+                          <label className="block text-sm font-semibold text-gray-700">Message *</label>
                           <Textarea
                             value={formData.message}
                             onChange={(e) => handleInputChange("message", e.target.value)}
                             placeholder="Tell us about your project..."
-                            rows={6}
+                            rows={5}
                             required
-                            className="transition-all duration-200 focus:ring-2 focus:ring-blue-500"
                           />
                         </motion.div>
 
@@ -261,11 +262,12 @@ export default function Contact() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: 0.4 }}
+                          className="pt-2"
                         >
                           <Button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full gradient-bg hover:opacity-90 text-white py-3 rounded-full text-lg font-semibold transition-all duration-200 hover:shadow-lg transform hover:scale-105"
+                            className="w-full gradient-bg hover:opacity-95 text-white py-3.5 px-6 rounded-xl text-base font-semibold transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-[1.02] cursor-pointer disabled:opacity-50"
                           >
                             {isSubmitting ? "Sending..." : "Send Message"}
                           </Button>

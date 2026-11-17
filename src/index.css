@@ -1,8 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-brand: "Bodoni Moda", serif;
+  --color-primary: #121421;
+  --color-secondary: #782F4C;
+  --color-accent: #D87070;
+  --color-accent-peach: #FFC1AC;
+  --color-text-light: #F7F3EF;
+}
+
+:root {
+  --primary: #121421;
+  --secondary: #782F4C;
+  --accent: #D87070;
+  --accent-peach: #FFC1AC;
+  --text-light: #F7F3EF;
+
+  --brand-gradient: #782F4C;
+
+  --font-brand: "Bodoni Moda", serif;
+
+  /* Backward compatibility aliases */
+  --primary-gradient: var(--secondary);
+  --primary-blue: var(--primary);
+  --primary-red: var(--secondary);
+}
+
+/* Apply font only for titles / headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-brand,
+.title {
+  font-family: var(--font-brand);
+}
+
+.gradient-bg {
+  background-color: var(--secondary);
+}
+
+.gradient-text {
+  color: var(--secondary);
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: initial;
+  background-clip: unset;
+}
+
+.hover-gradient {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.hover-gradient:hover::before {
+  left: 0;
+}
+
 body {
   margin: 0;
-  
   min-width: 320px;
   min-height: 100vh;
 }
-

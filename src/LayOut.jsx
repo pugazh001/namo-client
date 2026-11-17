@@ -25,24 +25,87 @@ export default function Layout({ children, currentPageName }) {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
+  // Dynamic SEO & Document Head Synchronization per Route
+  React.useEffect(() => {
+    const metaConfig = {
+      "/": {
+        title: "NAMODOT | Enterprise IT Solutions, ERP & Shipment Logistics",
+        description: "NAMODOT delivers next-generation IT solutions, campus and school ERP systems, healthcare platforms, and global shipment tracking intelligence with Namo Shipcart.",
+        canonical: "https://namodot.com/",
+      },
+      "/home": {
+        title: "NAMODOT | Enterprise IT Solutions, ERP & Shipment Logistics",
+        description: "NAMODOT delivers next-generation IT solutions, campus and school ERP systems, healthcare platforms, and global shipment tracking intelligence with Namo Shipcart.",
+        canonical: "https://namodot.com/",
+      },
+      "/products": {
+        title: "Enterprise Products & Software Suite | NAMODOT",
+        description: "Explore NAMODOT's product suite: Namo Shipcart for export-import tracking, Namo CampusOne ERP, Namo School management, Namo Healthcare, and HrSuite.",
+        canonical: "https://namodot.com/products",
+      },
+      "/services": {
+        title: "Software Development & IT Consulting Services | NAMODOT",
+        description: "Expert software engineering, enterprise cloud solutions, AI tool development, mobile apps, and IT consulting by NAMODOT.",
+        canonical: "https://namodot.com/services",
+      },
+      "/about": {
+        title: "About NAMODOT | Our Story, Vision & Team",
+        description: "Learn about NAMODOT, a new-age technology and AI organization created by passionate innovators delivering smart digital solutions.",
+        canonical: "https://namodot.com/about",
+      },
+      "/careers": {
+        title: "Careers at NAMODOT | Explore Tech Opportunities & Open Roles",
+        description: "Join our team of young innovators, engineers, and digital specialists at NAMODOT. Explore open roles and career paths in tech.",
+        canonical: "https://namodot.com/careers",
+      },
+      "/contact": {
+        title: "Contact NAMODOT | Get In Touch with Our Technology Team",
+        description: "Contact NAMODOT for enterprise software, ERP implementations, and shipment tracking solutions. Call +91 97915 57317 or email namodot01@gmail.com.",
+        canonical: "https://namodot.com/contact",
+      },
+    };
+
+    const current = metaConfig[location.pathname] || metaConfig["/"];
+    document.title = current.title;
+
+    let descTag = document.querySelector('meta[name="description"]');
+    if (descTag) {
+      descTag.setAttribute("content", current.description);
+    }
+    
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", current.title);
+
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute("content", current.description);
+
+    let canonicalTag = document.querySelector('link[rel="canonical"]');
+    if (canonicalTag) {
+      canonicalTag.setAttribute("href", current.canonical);
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
+
   return (
     <div className="min-h-screen bg-white">
       <style>{`
         :root {
-          --primary-gradient: linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(239, 68, 68) 100%);
-          --primary-blue: rgb(30, 58, 138);
-          --primary-red: rgb(239, 68, 68);
+          --primary-gradient: var(--secondary);
+          --primary-blue: var(--primary);
+          --primary-red: var(--secondary);
         }
         
         .gradient-bg {
-          background: linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(239, 68, 68) 100%);
+          background-color: var(--secondary);
         }
         
         .gradient-text {
-          background: linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(239, 68, 68) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: var(--secondary);
+          background: none;
+          -webkit-background-clip: unset;
+          -webkit-text-fill-color: initial;
+          background-clip: unset;
         }
         
         .hover-gradient {
@@ -57,7 +120,7 @@ export default function Layout({ children, currentPageName }) {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(239, 68, 68) 100%);
+          background-color: var(--secondary);
           transition: left 0.3s ease;
           z-index: -1;
         }
@@ -74,7 +137,7 @@ export default function Layout({ children, currentPageName }) {
           and using theme palette colors (theme.palette.primary.main, theme.palette.common.white).
         */
         .nav-item-active {
-          color: rgb(30, 58, 138);
+          color: var(--secondary);
           background-color: #ffffff;
           font-weight: 600;
           box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
@@ -91,59 +154,26 @@ export default function Layout({ children, currentPageName }) {
         }
         
         .nav-item-hover:hover {
-          border: 2px solid transparent;
-          background: linear-gradient(white, white) padding-box,
-                      linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(239, 68, 68) 100%) border-box;
+          border: 2px solid var(--secondary);
         }
 
         .get-started-btn {
-          border: 2px solid transparent;
-          background: linear-gradient(white, white) padding-box,
-                      linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(239, 68, 68) 100%) border-box;
+          border: 2px solid var(--secondary);
         }
       `}</style>
 
       {/* Header */}
       {/* 
         EDUCATIONAL NOTE FOR STUDENTS (Navbar Container & Primary Theme):
-        The navbar now uses the application's primary brand color (`var(--primary-blue)` / `rgb(30, 58, 138)`).
-        In Material UI (MUI), an equivalent navbar is built using:
-        `<AppBar position="sticky" color="primary" sx={{ bgcolor: 'primary.main', boxShadow: 3 }}>`
+        The navbar now uses the application's primary brand color (`var(--primary)`).
       */}
-      <header className="sticky top-0 z-50 bg-[var(--primary-blue)] text-white shadow-md border-b border-blue-900/40">
+      <header className="sticky top-0 z-50 bg-[var(--primary)] text-white shadow-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo & Brand Name */}
             <Link to={createPageUrl("Home")} className="flex items-center">
-              {/* 
-                EDUCATIONAL NOTE FOR STUDENTS (Hiding / Commenting Out Components):
-                The logo image is hidden via JSX comment as requested.
-                In Material UI (MUI), hiding elements can be done by commenting out the `<Avatar>` / `<CardMedia>` component,
-                or conditionally rendering it, or using CSS `sx={{ display: 'none' }}`.
-              */}
-              {/* 
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, ease: "backOut" }}
-                className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center mr-3 bg-slate-50 border border-gray-100"
-              >
-                <img src={namodotLogo} alt="Namodot Logo" className="w-full h-full object-contain p-1" />
-              </motion.div>
-              */}
-
-              {/* 
-                EDUCATIONAL NOTE FOR STUDENTS (Brand Typography & Text Transform):
-                Only "NAMODOT" is rendered in uppercase, keeping "IT Solutions" in its standard casing.
-                In Material UI (MUI), you can achieve this using `<Typography>` with nested spans or sx prop:
-                `<Typography variant="h6" component="div">
-                  <Box component="span" sx={{ textTransform: 'uppercase', fontWeight: 800 }}>NAMODOT</Box>{' '}
-                  <Box component="span" sx={{ textTransform: 'none', color: 'primary.light' }}>IT Solutions</Box>
-                </Typography>`
-              */}
-              <span className="text-xl md:text-2xl font-bold tracking-wide text-white">
-                <span className="uppercase font-extrabold tracking-wider text-white">NAMODOT</span>{" "}
-                <span className="text-blue-200 font-semibold text-lg">IT Solutions</span>
+              <span className="text-2xl md:text-3xl font-extrabold tracking-wider text-white font-brand uppercase">
+                NAMODOT
               </span>
             </Link>
 
@@ -188,7 +218,7 @@ export default function Layout({ children, currentPageName }) {
                 transition={{ delay: 0.5, duration: 0.3 }}
               >
                 <Link to={createPageUrl("Contact")}>
-                  <Button className="ml-4 px-6 py-2 rounded-full transition-all duration-200 hover:shadow-lg transform hover:scale-105 font-bold bg-white text-blue-900 hover:bg-blue-50 shadow-sm">
+                  <Button className="ml-4 px-6 py-2 rounded-full transition-all duration-200 hover:shadow-lg transform hover:scale-105 font-bold bg-white text-[var(--primary)] hover:bg-gray-100 shadow-sm">
                     Get Started
                   </Button>
                 </Link>
@@ -197,7 +227,7 @@ export default function Layout({ children, currentPageName }) {
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden p-2 text-white hover:text-blue-200 transition-colors"
+              className="md:hidden p-2 text-white hover:text-[var(--accent-peach)] transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle Navigation Menu"
             >
@@ -218,7 +248,7 @@ export default function Layout({ children, currentPageName }) {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden absolute top-16 left-0 right-0 bg-[var(--primary-blue)] border-b border-blue-900/60 shadow-xl overflow-hidden"
+              className="md:hidden absolute top-16 left-0 right-0 bg-[var(--primary)] border-b border-white/10 shadow-xl overflow-hidden"
             >
               <nav className="px-4 py-4 space-y-2">
                 {navigationItems.map((item, index) => {
@@ -234,8 +264,8 @@ export default function Layout({ children, currentPageName }) {
                         to={item.url}
                         className={`block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
                           isActive
-                            ? "bg-white text-blue-900 font-semibold shadow-sm"
-                            : "text-blue-100 hover:bg-white/10 hover:text-white"
+                            ? "bg-white text-[var(--primary)] font-semibold shadow-sm"
+                            : "text-white/90 hover:bg-white/10 hover:text-white"
                         }`}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
@@ -279,18 +309,17 @@ export default function Layout({ children, currentPageName }) {
       </AnimatePresence>
 
       {/* Footer */}
-      <footer className="bg-gray-50 border-t border-gray-100">
+      <footer className="bg-[var(--primary)] text-[var(--text-light)] border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="md:col-span-2">
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center mr-2 bg-slate-50 border border-gray-100">
-                  <img src={namodotLogo} alt="Namodot Logo" className="w-full h-full object-contain p-0.5" />
-                </div>
-                <span className="text-xl font-bold gradient-text">Namodot IT Solutions</span>
+                <span className="text-2xl font-extrabold text-[var(--text-light)] font-brand uppercase tracking-wider">
+                  NAMODOT
+                </span>
               </div>
-              <p className="text-gray-600 mb-4 max-w-md">
+              <p className="text-[var(--text-light)]/75 mb-4 max-w-md leading-relaxed">
                 Leading the future with innovative solutions and exceptional service.
                 Your trusted partner for business growth and success.
               </p>
@@ -298,13 +327,13 @@ export default function Layout({ children, currentPageName }) {
 
             {/* Quick Links */}
             <div>
-              <h3 className="font-semibold text-gray-900 mb-4">Quick Links</h3>
+              <h3 className="font-semibold text-[var(--text-light)] mb-4 tracking-wide">Quick Links</h3>
               <ul className="space-y-2">
                 {navigationItems.map((item) => (
                   <li key={item.title}>
                     <Link
                       to={item.url}
-                      className="text-gray-600 hover:text-blue-900 transition-colors duration-200"
+                      className="text-[var(--text-light)]/75 hover:text-[var(--accent-peach)] transition-colors duration-200"
                     >
                       {item.title}
                     </Link>
@@ -315,18 +344,21 @@ export default function Layout({ children, currentPageName }) {
 
             {/* Contact Info */}
             <div>
-              <h3 className="font-semibold text-gray-900 mb-4">Contact</h3>
-              <div className="space-y-2 text-gray-600">
+              <h3 className="font-semibold text-[var(--text-light)] mb-4 tracking-wide">Contact</h3>
+              <div className="space-y-2 text-[var(--text-light)]/75 text-sm">
+                <p>+91 97915 57317</p>
                 <p>namodot01@gmail.com</p>
-                <p>9025702729</p>
-                <p>9342615670</p>
-
+                <p className="pt-1 text-xs text-[var(--text-light)]/60 leading-relaxed">
+                  No. 4/167 I, 18th Cross, Shanmuga Nagar,<br />
+                  Sri Kailash Santhanam Garden, UKT Malai,<br />
+                  Trichy, Tamil Nadu
+                </p>
               </div>
             </div>
           </div>
 
-          <div className="border-t border-gray-200 mt-8 pt-8 text-center text-gray-500">
-            <p>&copy; 2024 Namodot IT Solutions. All rights reserved.</p>
+          <div className="border-t border-white/10 mt-8 pt-8 text-center text-[var(--text-light)]/60 text-sm">
+            <p>&copy; 2024 NAMODOT. All rights reserved.</p>
           </div>
         </div>
       </footer>
